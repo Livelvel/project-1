@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>?????</title>
+        <style>
+            body{
+                background-color: #caa4ec;
+                margin:0;
+                min-height: 100vh;
+                height: 100vh;
+                border:5px solid #f8eeb2;
+            }
+            .hiasan{
+                text-align: center;
+                margin-top: 30vh;
+                color:white;
+            }
+            .judul{
+                text-align: center;
+                color:#ffffff;
+            }
+            .pesan{
+                text-align: justify;
+                line-height: 1,6;
+                max-width: 400px;
+                margin:20px auto;
+                font-family:Tahoma;
+                color: #ffffff;
+                font-size: medium;
+            }
+            button{
+                display:block;
+                margin:auto;
+                text-align: center;
+                font-family: Tahoma;
+                background: #ffb5dc;
+                color:white;
+                border:1px solid white;
+                font-size: medium;
+            }
+            .teks{
+                text-align: center;
+                font-family: Tahoma;
+                color:white;
+            }
+            .hiasan2{
+                text-align: center;
+                color:white;
+            }
+            #loading-screen{
+                position:fixed;
+                inset:0;
+                background:#b49acf;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 9999;
+            }
+            .loading-content{
+                text-align: center;
+                color: white;
+                font-family: Tahoma;
+            }
+            .flower{
+                font-size: 50px;
+                animation: bunga 4s linear infinite;
+            }
+            .loading-bar{
+                width: 200px;
+                height: 10px;
+                background: white;
+                border-radius: 10px;
+                overflow: hidden;
+                margin: 20px auto;
+            }
+            .loading-progress{
+                width: 0%;
+                height: 100%;
+                background:#ffb5dc;
+                animation:loading 5s forwards;
+            }
+            @keyframes loading{
+                from{
+                    width: 0%;
+                }
+                to{
+                    width: 100%;
+                }
+            }
+            @keyframes bunga{
+                from{
+                    transform:rotate(0deg);
+                }
+                to{
+                    transform:rotate(360deg);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div id="loading-screen">
+            <div class="loading-content">
+                <div class="flower">🌸</div>
+                <p>Wait a moment<span id="dots">...</span></p>
+                <div class="loading-bar">
+                    <div class="loading-progress"></div>
+                </div>
+            </div>
+        </div>
+        <p class=hiasan>
+            ミミ◦❧◦°˚°◦.¸¸◦°´*•.¸♡♡¸.•*´°◦¸¸.◦°˚°◦☙◦彡彡
+        </p>
+        <h1 class="judul">
+            WELCOME!
+        </h1>
+        <P class="pesan">
+            Hello my special guest.
+            Welcome to my web!! 
+            This is my first project and you are my first guest.
+            Thank you for being my first guest^^.
+        </P>
+        <button onclick="tombol()">
+            <b>Klo ditekan meledak</b>
+        </button>
+        <div class="teks">
+            <p>
+                <i>
+                    <b>
+                        OPEN IT!
+                        </b>
+                </i>
+            </p>
+        </div>
+        <p class=hiasan2>
+            ミミ◦❧◦°˚°◦.¸¸◦°´*•.¸♡♡¸.•*´°◦¸¸.◦°˚°◦☙◦彡彡
+        </p>
+        <script>
+            setTimeout(function(){
+                document.getElementById("loading-screen").style.display="none";
+            }, 5000);
+
+            let dots=
+            document.getElementById("dots");
+            let jumlah=0;
+
+            setInterval(function(){
+                jumlah++;
+
+                if(jumlah>3){
+                    jumlah=1;
+                }
+                dots.textContent=
+                ".".repeat(jumlah);
+            }, 500);
+            function tombol() {
+                location.href="buket.html";
+            }
+        </script>
+    </body>
+</html>

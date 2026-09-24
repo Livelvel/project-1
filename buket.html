@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            For you
+        </title>
+        <style>
+            body{
+                background:#ffe4ff;
+            }
+            h1{
+                background:#f58787;
+                height:50px;
+                width: 350px;
+                border-radius: 5%;
+                color:white;
+                font-family: Tahoma;
+            }
+            .kalender{
+                background:white;
+                border-radius: 10%;
+                width:350px;
+                height:250px;
+                margin:30px auto;
+                text-align: center;
+            }
+            .hari,
+            .tanggal{
+                display:grid;
+                grid-template-columns: repeat(7,1fr);
+                gap:10px;
+            }
+            .tanggal{
+                margin-top: 10px;
+            }
+            .tanggal-ultah{
+                background:#f58787;
+                color:white;
+                border-radius: 50%;
+                width:25px;
+                height:25px;
+                display:flex;
+                align-items: center;
+                justify-content: center;
+                margin:auto;
+                transform:translateY(-4px);
+            }
+            .buket{
+                position: relative;
+                width: 305px;
+                height: 350px;
+                margin:50px auto 0;
+            }
+            .bunga{
+                position: absolute;
+            }
+            .bunga1{
+                top: 75px;
+                left: 70px;
+                transform:rotate(5deg);
+            }
+            .bunga2{
+                top:35px;
+                left:45px;
+                transform: rotate(-15deg);
+            }
+            .bunga3{
+                top:35px;
+                left:135px;
+                transform: rotate(5deg);
+            }
+            .bunga4{
+                top:75px;
+                left:35px;
+                transform:rotate(-35deg)
+            }
+            .bunga5{
+                top:60px;
+                left:95px;
+                transform: rotate(10deg);
+            }
+            .bunga6{
+                top:85px;
+                left:155px;
+                transform: rotate(15deg);
+            }
+            .bunga7{
+                top:110px;
+                left:45px;
+                transform:rotate(-5deg);
+            }
+            .bunga8{
+                top:110px;
+                left:120px;
+                transform: rotate(0deg);
+            }
+            .bunga9{
+                top:105px;
+                left:175px;
+                transform: rotate(35deg);
+            }
+            .bunga10{
+                top:130px;
+                left:70px;
+                transform: rotate(10deg);
+            }
+            .bunga11{
+                top:130px;
+                left:40px;
+                transform: rotate(-35deg);
+            }
+            .bunga12{
+                top:145px;
+                left:145px;
+                transform: rotate(5deg);
+            }
+            .bunga13{
+                top:170px;
+                left:65px;
+                transform: rotate(-10deg);
+            }
+            .bunga14{
+                top:170px;
+                left:175px;
+                transform: rotate(15deg);
+            }
+            .bunga15{
+                top:180px;
+                left:100px;
+                transform: rotate(10deg);
+            }
+            .kelopak{
+                position:relative;
+                width:50px;
+                height:50px;
+                background-color: pink;
+                border-radius: 50%;
+                z-index: 1;
+            }
+            .kelopak::before,
+            .kelopak::after{
+                content:"";
+                position: absolute;
+                width: 40px;
+                height: 40px;
+                background-color: pink;
+                border-radius: 50%;
+            }
+            .kelopak::before{
+                top: -18px;
+                left:0;
+            }
+            .kelopak::after{
+                top:0;
+                left:18px;
+            }
+            .kelopak{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .tengah-bunga{
+                position: absolute;
+                width: 18px;
+                height: 18px;
+                background: #f8eeb2;
+                border-radius: 50%;
+                top:16px;
+                left:16px;
+                z-index:2;
+            }
+            .daun{
+                width: 30px;
+                height: 50px;
+                background-color: lightgreen;
+                border-radius: 100% 0 100% 0;
+                position: absolute;
+                left: -3px;
+                top:55px;
+                transform: rotate(-50deg);
+            }
+            .batang{
+                width: 5px;
+                height: 100px;
+                background-color: green;
+                margin:auto;
+            }
+            .bungkus{
+                position: absolute;
+                width: 150px;
+                height:180px;
+                background:#f8eeb2;
+                top: 250px;
+                left: 50px;
+                clip-path: polygon(0% 0%, 100% 0, 60% 100%,40 100%);
+            }
+            .bunga.goyang{
+                position: absolute;
+                animation: goyang 0.6s ease-in-out;
+            }
+            .amplop{
+                position: relative;
+                top:0;
+                width: 260px;
+                height:170px;
+                margin: 150px auto 20px;
+                left:-15px;
+                perspective: 600px;
+            }
+            .surat-dalam{
+                position: absolute;
+                width: 260px;
+                height: 160px;
+                background:#ffd3fb;
+                left:5px;
+                top:5px;
+            }
+            .surat-kecil{
+                position: absolute;
+                width: 150px;
+                height: 85px;
+                background: white;
+                left: 55px;
+                top:40px;
+                z-index:1;
+                transition: transform 1s ease;
+                transform:translateY(60px);
+            }
+            .depan-amplop{
+                position: absolute;
+                width: 260px;
+                height:95px;
+                background:#ffd3fb;
+                left:5px;
+                bottom:-20px;
+                z-index: 2;
+            }
+            .tutup{
+                transition: transform 1.5s ease-in-out;
+                transform-origin: top center;
+                position: absolute;
+                width: 0;
+                height: 0;
+                border-left: 125px solid transparent;
+                border-right: 125px solid transparent;
+                border-top: 85px solid #d9b7e4;
+                top: 5px;
+                left: 5px;
+            }
+            .amplop.buka .tutup{
+                transform: rotateX(180deg);
+            }
+            .amplop.buka .surat-kecil{
+                transform:translateY(-60px);
+            }
+            @keyframes goyang{
+                0%{
+                    rotate: 0deg;
+                }
+                25%{
+                    rotate: -6deg;
+                }
+                50%{
+                    rotate: 6deg;
+                }
+                75%{
+                    rotate: -4deg;
+                }
+                100%{
+                    rotate: 0deg;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="kalender">
+            <h1>September 2026</h1>
+            <div class="hari">
+                <span>Sun</span>
+                <span>Mon</span>
+                <span>Tue</span>
+                <span>Wed</span>
+                <span>Thu</span>
+                <span>Fri</span>
+                <span>Sat</span>
+            </div>
+            <div class="tanggal">
+                <span></span>
+                <span></span>
+                <span>1</span>
+                <span>2</span>
+                <span>3</span>
+                <span>4</span>
+                <span>5</span>
+                <span>6</span>
+                <span>7</span>
+                <span>8</span>
+                <span>9</span>
+                <span>10</span>
+                <span>11</span>
+                <span>12</span>
+                <span>13</span>
+                <span>14</span>
+                <span>15</span>
+                <span>16</span>
+                <span>17</span>
+                <span>18</span>
+                <span>19</span>
+                <span>20</span>
+                <span>21</span>
+                <span>22</span>
+                <span>23</span>
+                <span>24</span>
+                <span class="tanggal-ultah">25</span>
+                <span>26</span>
+                <span>27</span>
+                <span>28</span>
+                <span>29</span>
+                <span>30</span>
+            </div>
+        </div>
+        <div class="buket">
+            <div class="bunga bunga1">
+                <div class="kelopak">
+                    <div class="tengah-bunga"></div>
+                </div>
+                <div class="batang"></div>
+                <div class="daun"></div>
+            </div>
+            <div class="bunga bunga2">
+                <div class="kelopak">
+                    <div class="tengah-bunga"></div>
+                </div>
+                <div class="batang"></div>
+                <div class="daun"></div>
+            </div>
+            <div class="bunga bunga3">
+                <div class="kelopak">
+                    <div class="tengah-bunga"></div>
+                </div>
+                <div class="batang"></div>
+                <div class="daun"></div>
+            </div>
+            <div class="bunga bunga4">
+                <div class="kelopak">
+                    <div class="tengah-bunga"></div>
+                </div>
+                <div class="batang"></div>
+                <div class="daun"></div>
+            </div>
+            <div class="bunga bunga5">
+                <div class="kelopak">
+                    <div class="tengah-bunga"></div>
+                </div>
+                <div class="batang"></div>
+                <div class="daun"></div>
+            </div>
+            <div class="bunga bunga6">
+                <div class="kelopak">
+                    <div class="tengah-bunga"></div>
+                </div>
+                <div class="batang"></div>
+                <div class="daun"></div>
+            </div>
+            <div class="bunga bunga7">
+                <div class="kelopak">
+                    <div class="tengah-bunga"></div>
+                </div>
+                <div class="batang"></div>
+                <div class="daun"></div>
+            </div>
+            <div class="bunga bunga8">
+                <div class="kelopak">
+                    <div class="tengah-bunga"></div>
+                </div>
+                <div class="batang"></div>
+                <div class="daun"></div>
+            </div>
+            <div class="bunga bunga9">
+                <div class="kelopak">
+                    <div class="tengah-bunga"></div>
+                </div>
+                <div class="batang"></div>
+                <div class="daun"></div>
+            </div>
+            <div class="bunga bunga10">
+                <div class="kelopak">
+                    <div class="tengah-bunga"></div>
+                </div>
+                <div class="batang"></div>
+                <div class="daun"></div>
+            </div>
+            <div class="bunga bunga11">
+                <div class="kelopak">
+                    <div class="tengah-bunga"></div>
+                </div>
+                <div class="batang"></div>
+                <div class="daun"></div>
+            </div>
+            <div class="bunga bunga12">
+                <div class="kelopak">
+                    <div class="tengah-bunga"></div>
+                </div>
+                <div class="batang"></div>
+                <div class="daun"></div>
+            </div>
+            <div class="bunga bunga13">
+                <div class="kelopak">
+                    <div class="tengah-bunga"></div>
+                </div>
+                <div class="batang"></div>
+                <div class="daun"></div>
+            </div>
+            <div class="bunga bunga14">
+                <div class="kelopak">
+                    <div class="tengah-bunga"></div>
+                </div>
+                <div class="batang"></div>
+                <div class="daun"></div>
+            </div>
+            <div class="bunga bunga15">
+                <div class="kelopak">
+                    <div class="tengah-bunga"></div>
+                </div>
+                <div class="batang"></div>
+                <div class="daun"></div>
+            </div>
+            <div class="bungkus"></div>
+        </div>
+        <div class="amplop"onclick="bukaAmplop()">
+            <div class="surat-dalam"></div>
+            <div class="tutup"></div>
+            <div class="surat-kecil"onclick="bukaSurat(event)"></div>
+            <div class="depan-amplop"></div>
+        </div>
+        <button onclick="history.back()">back</button>
+        <script>
+            function bukaAmplop(){
+                document.querySelector(".amplop").classList.toggle("buka");
+            }
+            function bukaSurat(event){
+                event.stopPropagation();
+                window.location.href="surat.html";
+            }
+            document.querySelectorAll(".bunga").forEach(function(bunga){
+
+                bunga.addEventListener("click", function(){
+                    bunga.classList.remove("goyang");
+
+                    void bunga.offsetWidth;
+
+                    bunga.classList.add("goyang");
+                });
+            });
+        </script>
+    </body>
+</html>
